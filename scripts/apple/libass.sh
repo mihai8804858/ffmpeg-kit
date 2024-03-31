@@ -27,7 +27,6 @@ fi
   --disable-fast-install \
   --disable-test \
   --disable-profile \
-  --disable-coretext \
   ${ASM_OPTIONS} \
   --host="${HOST}" || return 1
 
