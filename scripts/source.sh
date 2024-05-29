@@ -38,17 +38,17 @@ get_library_source() {
     ;;
   fontconfig)
     SOURCE_REPO_URL="https://github.com/arthenica/fontconfig"
-    SOURCE_ID="2.14.2"
+    SOURCE_ID="2.15.0"
     SOURCE_TYPE="TAG"
     ;;
   freetype)
     SOURCE_REPO_URL="https://github.com/arthenica/freetype2"
-    SOURCE_ID="VER-2-13-0"
+    SOURCE_ID="VER-2-13-2"
     SOURCE_TYPE="TAG"
     ;;
   fribidi)
     SOURCE_REPO_URL="https://github.com/arthenica/fribidi"
-    SOURCE_ID="v1.0.13"
+    SOURCE_ID="v1.0.14"
     SOURCE_TYPE="TAG"
     ;;
   giflib)
@@ -68,7 +68,7 @@ get_library_source() {
     ;;
   harfbuzz)
     SOURCE_REPO_URL="https://github.com/arthenica/harfbuzz"
-    SOURCE_ID="8.0.1"
+    SOURCE_ID="8.5.0"
     SOURCE_TYPE="TAG"
     ;;
   jpeg)
@@ -98,7 +98,7 @@ get_library_source() {
     ;;
   libass)
     SOURCE_REPO_URL="https://github.com/arthenica/libass"
-    SOURCE_ID="0.17.1"
+    SOURCE_ID="0.17.2"
     SOURCE_TYPE="TAG"
     ;;
   libiconv)
@@ -118,7 +118,7 @@ get_library_source() {
     ;;
   libpng)
     SOURCE_REPO_URL="https://github.com/arthenica/libpng"
-    SOURCE_ID="v1.6.40"
+    SOURCE_ID="v1.6.43"
     SOURCE_TYPE="TAG"
     ;;
   libsamplerate)
