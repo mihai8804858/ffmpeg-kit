@@ -6,13 +6,14 @@ prepare_inline_sed
 
 enable_default_xros_architectures() {
   ENABLED_ARCHITECTURES[ARCH_ARM64]=1
+  ENABLED_ARCHITECTURES[ARCH_X86_64]=1
   ENABLED_ARCHITECTURES[ARCH_ARM64_SIMULATOR]=1
 }
 
 display_help() {
   COMMAND=$(echo "$0" | sed -e 's/\.\///g')
 
-  echo -e "\n'$COMMAND' builds FFmpegKit for xrOS platform. By default two architectures (arm64, arm64-simulator) are enabled without any external \
+  echo -e "\n'$COMMAND' builds FFmpegKit for xrOS platform. By default three architectures (arm64, arm64-simulator and x86-64) are enabled without any external \
 libraries. Options can be used to disable architectures and/or enable external libraries. Please note that GPL \
 libraries (external libraries with GPL license) need --enable-gpl flag to be set explicitly. When compilation ends, \
 libraries are created under the prebuilt folder.\n"
@@ -25,6 +26,7 @@ libraries are created under the prebuilt folder.\n"
   echo -e "Architectures:"
   echo -e "  --disable-arm64\t\tdo not build arm64 architecture [yes]"
   echo -e "  --disable-arm64-simulator\tdo not build arm64-simulator architecture [yes]"
+  echo -e "  --disable-x86-64\t\tdo not build x86-64 architecture [yes]\n"
 
   echo -e "Libraries:"
 
@@ -82,7 +84,7 @@ get_common_cflags() {
   arm64)
     echo "-fstrict-aliasing ${BITCODE_FLAGS} -DXROS ${LTS_BUILD_FLAG}${BUILD_DATE} -isysroot ${SDK_PATH}"
     ;;
-  arm64-simulator)
+  x86-64 | arm64-simulator)
     echo "-fstrict-aliasing -DXROS ${LTS_BUILD_FLAG}${BUILD_DATE} -isysroot ${SDK_PATH}"
     ;;
   esac
@@ -96,6 +98,9 @@ get_arch_specific_cflags() {
   arm64-simulator)
     echo "-arch arm64 -target $(get_target) -march=armv8-a+crc+crypto -mcpu=generic -DFFMPEG_KIT_ARM64_SIMULATOR"
     ;;
+  x86-64)
+    echo "-arch x86_64 -target $(get_target) -march=x86-64 -msse4.2 -mpopcnt -m64 -DFFMPEG_KIT_X86_64"
+    ;;
   esac
 }
 
@@ -105,7 +110,7 @@ get_size_optimization_cflags() {
   arm64)
     ARCH_OPTIMIZATION="-Oz -Wno-ignored-optimization-argument"
     ;;
-  arm64-simulator)
+  x86-64 | arm64-simulator)
     ARCH_OPTIMIZATION="-O2 -Wno-ignored-optimization-argument"
     ;;
   esac
@@ -121,7 +126,7 @@ get_size_optimization_asm_cflags() {
     arm64)
       ARCH_OPTIMIZATION="-Oz"
       ;;
-    arm64-simulator)
+    x86-64 | arm64-simulator)
       ARCH_OPTIMIZATION="-O2"
       ;;
     esac
@@ -306,6 +311,9 @@ get_arch_specific_ldflags() {
     ;;
   arm64-simulator)
     echo "-arch arm64 -march=armv8-a+crc+crypto -target $(get_target)"
+    ;;
+  x86-64)
+    echo "-arch x86_64 -march=x86-64 -target $(get_target)"
     ;;
   esac
 }

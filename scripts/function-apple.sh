@@ -833,7 +833,7 @@ get_apple_architectures_for_variant() {
     done
     ;;
   "${ARCH_VAR_XR}")
-    for index in ${ARCH_ARM64} ${ARCH_ARM64_SIMULATOR}; do
+    for index in ${ARCH_ARM64} ${ARCH_X86_64} ${ARCH_ARM64_SIMULATOR}; do
       ARCHITECTURES+=" $(get_full_arch_name "${index}") "
     done
     ;;
@@ -843,7 +843,7 @@ get_apple_architectures_for_variant() {
     done
     ;;
   "${ARCH_VAR_XRSIMULATOR}")
-    for index in ${ARCH_ARM64_SIMULATOR}; do
+    for index in ${ARCH_X86_64} ${ARCH_ARM64_SIMULATOR}; do
       ARCHITECTURES+=" $(get_full_arch_name "${index}") "
     done
     ;;
@@ -1068,6 +1068,9 @@ get_sdk_name() {
     macos)
       echo "macosx"
       ;;
+    xros)
+      echo "xrsimulator"
+      ;;
     esac
     ;;
   i386)
@@ -1123,6 +1126,9 @@ get_min_version_cflags() {
       ;;
     macos)
       echo "-mmacosx-version-min=$(get_min_sdk_version)"
+      ;;
+    xros)
+      echo ""
       ;;
     esac
     ;;
